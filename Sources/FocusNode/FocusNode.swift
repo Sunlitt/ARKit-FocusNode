@@ -351,7 +351,7 @@ open class FocusNode: SCNNode {
 		updateRenderOrder(for: self.positioningNode)
 	}
 
-	public func updateFocusNode() {
+	@MainActor public func updateFocusNode() {
 		guard let view = self.viewDelegate as? (ARSCNView & ARSmartHitTest) else {
 			print("FocusNode viewDelegate must be an ARSCNView for now")
 			return
@@ -362,27 +362,14 @@ open class FocusNode: SCNNode {
 				view.pointOfView?.addChildNode(self)
 			return
 		}
-		var result: ARHitTestResult?
-		if !Thread.isMainThread {
-			if let center = self.screenCenter {
-				result = view.smartHitTest(center)
-			} else {
-				DispatchQueue.main.async {
-					self.screenCenter = view.screenCenter
-					self.updateFocusNode()
-				}
-				return
-			}
-		} else {
-			result = view.smartHitTest(view.screenCenter)
-		}
+        let result = view.smartHitTest(view.screenCenter)
 
-		if let result = result {
+		if let result {
 				view.scene.rootNode.addChildNode(self)
 				self.state = .detecting(hitTestResult: result, camera: camera)
 		} else {
 				self.state = .initializing
-				view.pointOfView?.addChildNode(self)
+//				view.pointOfView?.addChildNode(self)
 		}
 	}
 }
