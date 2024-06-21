@@ -85,7 +85,7 @@ open class FocusNode: SCNNode {
 	private(set) var currentPlaneAnchor: ARPlaneAnchor?
 
 	/// The focus square's most recent positions.
-	private var recentFocusNodePositions: [SIMD3<Float>] = []
+	public private(set) var recentFocusNodePositions: [SIMD3<Float>] = []
 
 	/// The focus square's most recent alignments.
 	private(set) var recentFocusNodeAlignments: [ARPlaneAnchor.Alignment] = []
@@ -146,7 +146,7 @@ open class FocusNode: SCNNode {
 	private func displayAsBillboard() {
 		self.onPlane = false
 		simdTransform = matrix_identity_float4x4
-//		eulerAngles.x = .pi / 2
+		eulerAngles.x = .pi / 4
 		simdPosition = SIMD3<Float>(0, 0, -1)
 		unhide()
 		stateChangedSetup()
