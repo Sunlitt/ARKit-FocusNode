@@ -155,7 +155,7 @@ open class FocusNode: SCNNode {
 	/// Called when a surface has been detected.
 	private func displayOffPlane(for hitTestResult: ARHitTestResult, camera: ARCamera?) {
 		self.stateChangedSetup()
-//		let position = hitTestResult.worldTransform.translation
+		let position = hitTestResult.worldTransform.translation
 //		recentFocusNodePositions.append(position)
 		updateTransform(for: position, hitTestResult: hitTestResult, camera: camera)
 	}
