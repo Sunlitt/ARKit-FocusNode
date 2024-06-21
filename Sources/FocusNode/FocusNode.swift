@@ -288,7 +288,11 @@ open class FocusNode: SCNNode {
 		guard let camera = camera else { return 1.0 }
 
 		let distanceFromCamera = simd_length(simdWorldPosition - camera.transform.translation)
-        return (5.0 / 3000) * distanceFromCamera
+		if distanceFromCamera < 0.7 {
+			return distanceFromCamera / 0.7
+		} else {
+            return max(0.4, min(1, 1 - distanceFromCamera * 0.7))
+		}
 	}
 
 	// MARK: Animations
