@@ -60,9 +60,9 @@ open class FocusNode: SCNNode {
                 if let planeAnchor = hitTestResult.anchor as? ARPlaneAnchor, planeAnchor.alignment == allowedAlignment {
 					nodeOnPlane(for: hitTestResult, planeAnchor: planeAnchor, camera: camera)
 					currentPlaneAnchor = planeAnchor
-				} else {
-//					nodeOffPlane(hitTestResult, camera)
-//					currentPlaneAnchor = nil
+                } else if recentFocusNodePositions.isEmpty {
+					nodeOffPlane(hitTestResult, camera)
+					currentPlaneAnchor = nil
 				}
 			}
 		}
@@ -147,7 +147,7 @@ open class FocusNode: SCNNode {
 		self.onPlane = false
 		simdTransform = matrix_identity_float4x4
         eulerAngles.x = .pi / 6
-        simdPosition = SIMD3<Float>(0, 0, -1.25)
+        simdPosition = SIMD3<Float>(0, 0, -1.3)
 		unhide()
 		stateChangedSetup()
 	}
