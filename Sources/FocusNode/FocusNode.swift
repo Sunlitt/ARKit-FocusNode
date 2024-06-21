@@ -61,8 +61,8 @@ open class FocusNode: SCNNode {
 					nodeOnPlane(for: hitTestResult, planeAnchor: planeAnchor, camera: camera)
 					currentPlaneAnchor = planeAnchor
 				} else {
-//					nodeOffPlane(hitTestResult, camera)
-//					currentPlaneAnchor = nil
+					nodeOffPlane(hitTestResult, camera)
+					currentPlaneAnchor = nil
 				}
 			}
 		}
