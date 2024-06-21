@@ -206,7 +206,7 @@ open class FocusNode: SCNNode {
 		let average = recentFocusNodePositions.reduce(
 			SIMD3<Float>(repeating: 0), { $0 + $1 }
 		) / Float(recentFocusNodePositions.count)
-		self.simdPosition = average
+        self.simdPosition = hitTestResult.worldTransform.translation
 		if self.scaleNodeBasedOnDistance {
 			self.simdScale = SIMD3<Float>(repeating: scaleBasedOnDistance(camera: camera))
 		}
