@@ -26,7 +26,7 @@ public class FocusPlane: FocusNode {
 	/// - Parameter size: Size in m of the square. Default is 0.17
 	public init(size: Float = 0.17) {
 		self.size = size
-		super.init()
+        super.init(allowedAlignment: .horizontal)
 		opacity = 0.0
 		self.positioningNode.addChildNode(fillPlane)
 	}

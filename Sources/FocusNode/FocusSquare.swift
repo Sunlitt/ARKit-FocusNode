@@ -51,8 +51,8 @@ public class FocusSquare: FocusNode {
 
 	// MARK: - Initialization
 
-	public override init() {
-		super.init()
+	public init() {
+        super.init(allowedAlignment: .horizontal)
 		opacity = 0.0
 
 		/*
