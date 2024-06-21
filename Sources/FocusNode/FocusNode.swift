@@ -200,7 +200,7 @@ open class FocusNode: SCNNode {
         }
         
 		// Average using several most recent positions.
-		recentFocusNodePositions = Array(recentFocusNodePositions.suffix(8))
+		recentFocusNodePositions = Array(recentFocusNodePositions.suffix(2))
 
 		// Move to average of recent positions to avoid jitter.
 		let average = recentFocusNodePositions.reduce(
