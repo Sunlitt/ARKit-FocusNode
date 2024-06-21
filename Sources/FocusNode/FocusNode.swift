@@ -146,8 +146,8 @@ open class FocusNode: SCNNode {
 	private func displayAsBillboard() {
 		self.onPlane = false
 		simdTransform = matrix_identity_float4x4
-		eulerAngles.x = .pi / 4
-		simdPosition = SIMD3<Float>(0, 0, -1)
+		eulerAngles.x = .pi / 3
+        simdPosition = SIMD3<Float>(0, 0, -1.4)
 		unhide()
 		stateChangedSetup()
 	}
