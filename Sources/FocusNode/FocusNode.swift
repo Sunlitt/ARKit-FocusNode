@@ -57,7 +57,7 @@ open class FocusNode: SCNNode {
 				displayAsBillboard()
 
 			case let .detecting(hitTestResult, camera):
-				if let planeAnchor = hitTestResult.anchor as? ARPlaneAnchor {
+                if let planeAnchor = hitTestResult.anchor as? ARPlaneAnchor, planeAnchor.alignment == allowedAlignment {
 					nodeOnPlane(for: hitTestResult, planeAnchor: planeAnchor, camera: camera)
 					currentPlaneAnchor = planeAnchor
 				} else {
@@ -67,6 +67,8 @@ open class FocusNode: SCNNode {
 			}
 		}
 	}
+    
+    public var allowedAlignment: ARPlaneAnchor.Alignment
 
 	public var onPlane: Bool = false
 
@@ -104,7 +106,8 @@ open class FocusNode: SCNNode {
 
 	// MARK: - Initialization
 
-	public override init() {
+    public init(allowedAlignment: ARPlaneAnchor.Alignment) {
+        self.allowedAlignment = allowedAlignment
 		super.init()
 		self.positioningNode.eulerAngles.x = .pi / 2 // Horizontal
 
@@ -143,8 +146,8 @@ open class FocusNode: SCNNode {
 	private func displayAsBillboard() {
 		self.onPlane = false
 		simdTransform = matrix_identity_float4x4
-		eulerAngles.x = .pi / 2
-		simdPosition = SIMD3<Float>(0, 0, -0.8)
+//		eulerAngles.x = .pi / 2
+		simdPosition = SIMD3<Float>(0, 0, -1)
 		unhide()
 		stateChangedSetup()
 	}
