@@ -174,8 +174,33 @@ open class FocusNode: SCNNode {
 
 	/// Update the transform of the focus square to be aligned with the camera.
 	private func updateTransform(for position: SIMD3<Float>, hitTestResult: ARHitTestResult, camera: ARCamera?) {
+        // Correct y rotation of camera square.
+        guard let camera = camera else { return }
+        let tilt = abs(camera.eulerAngles.x)
+        let threshold1: Float = .pi / 2 * 0.65
+        let threshold2: Float = .pi / 2 * 0.75
+        let yaw = atan2f(camera.transform.columns.0.x, camera.transform.columns.1.x)
+        var angle: Float = 0
+
+        switch tilt {
+        case 0..<threshold1:
+            angle = camera.eulerAngles.y
+
+        case threshold1..<threshold2:
+            let relativeInRange = abs((tilt - threshold1) / (threshold2 - threshold1))
+            let normalizedY = normalize(camera.eulerAngles.y, forMinimalRotationTo: yaw)
+            angle = normalizedY * (1 - relativeInRange) + yaw * relativeInRange
+
+        default:
+            angle = yaw
+        }
+
+        if state != .initializing {
+            updateAlignment(for: hitTestResult, yRotationAngle: angle)
+        }
+        
 		// Average using several most recent positions.
-		recentFocusNodePositions = Array(recentFocusNodePositions.suffix(10))
+		recentFocusNodePositions = Array(recentFocusNodePositions.suffix(8))
 
 		// Move to average of recent positions to avoid jitter.
 		let average = recentFocusNodePositions.reduce(
@@ -184,31 +209,6 @@ open class FocusNode: SCNNode {
 		self.simdPosition = average
 		if self.scaleNodeBasedOnDistance {
 			self.simdScale = SIMD3<Float>(repeating: scaleBasedOnDistance(camera: camera))
-		}
-
-		// Correct y rotation of camera square.
-		guard let camera = camera else { return }
-		let tilt = abs(camera.eulerAngles.x)
-		let threshold1: Float = .pi / 2 * 0.65
-		let threshold2: Float = .pi / 2 * 0.75
-		let yaw = atan2f(camera.transform.columns.0.x, camera.transform.columns.1.x)
-		var angle: Float = 0
-
-		switch tilt {
-		case 0..<threshold1:
-			angle = camera.eulerAngles.y
-
-		case threshold1..<threshold2:
-			let relativeInRange = abs((tilt - threshold1) / (threshold2 - threshold1))
-			let normalizedY = normalize(camera.eulerAngles.y, forMinimalRotationTo: yaw)
-			angle = normalizedY * (1 - relativeInRange) + yaw * relativeInRange
-
-		default:
-			angle = yaw
-		}
-
-		if state != .initializing {
-			updateAlignment(for: hitTestResult, yRotationAngle: angle)
 		}
 	}
 
