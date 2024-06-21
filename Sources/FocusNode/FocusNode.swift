@@ -60,9 +60,9 @@ open class FocusNode: SCNNode {
                 if let planeAnchor = hitTestResult.anchor as? ARPlaneAnchor, planeAnchor.alignment == allowedAlignment {
 					nodeOnPlane(for: hitTestResult, planeAnchor: planeAnchor, camera: camera)
 					currentPlaneAnchor = planeAnchor
-                } else if recentFocusNodePositions.isEmpty {
-					nodeOffPlane(hitTestResult, camera)
-					currentPlaneAnchor = nil
+                } else {
+//					nodeOffPlane(hitTestResult, camera)
+//					currentPlaneAnchor = nil
 				}
 			}
 		}
