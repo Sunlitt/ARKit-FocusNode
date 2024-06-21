@@ -291,7 +291,7 @@ open class FocusNode: SCNNode {
 		if distanceFromCamera < 0.7 {
 			return distanceFromCamera / 0.7
 		} else {
-            return max(0.4, min(1, 1 - distanceFromCamera * 0.7))
+            return max(0.4, min(1, 1 - distanceFromCamera * 0.4))
 		}
 	}
 
