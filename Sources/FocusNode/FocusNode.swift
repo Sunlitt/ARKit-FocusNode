@@ -199,7 +199,15 @@ open class FocusNode: SCNNode {
             updateAlignment(for: hitTestResult, yRotationAngle: angle)
         }
         
-        self.simdPosition = position
+        // Average using several most recent positions.
+        recentFocusNodePositions = Array(recentFocusNodePositions.suffix(10))
+
+        // Move to average of recent positions to avoid jitter.
+        let average = recentFocusNodePositions.reduce(
+            SIMD3<Float>(repeating: 0), { $0 + $1 }
+        ) / Float(recentFocusNodePositions.count)
+        
+        self.simdPosition = average
 		if self.scaleNodeBasedOnDistance {
 			self.simdScale = SIMD3<Float>(repeating: scaleBasedOnDistance(camera: camera))
 		}
