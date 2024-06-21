@@ -147,7 +147,7 @@ open class FocusNode: SCNNode {
 		self.onPlane = false
 		simdTransform = matrix_identity_float4x4
         eulerAngles.x = .pi / 6
-        simdPosition = SIMD3<Float>(0, 0, -1.2)
+        simdPosition = SIMD3<Float>(0, 0, -1.25)
 		unhide()
 		stateChangedSetup()
 	}
@@ -155,8 +155,8 @@ open class FocusNode: SCNNode {
 	/// Called when a surface has been detected.
 	private func displayOffPlane(for hitTestResult: ARHitTestResult, camera: ARCamera?) {
 		self.stateChangedSetup()
-		let position = hitTestResult.worldTransform.translation
-		recentFocusNodePositions.append(position)
+//		let position = hitTestResult.worldTransform.translation
+//		recentFocusNodePositions.append(position)
 		updateTransform(for: position, hitTestResult: hitTestResult, camera: camera)
 	}
 
@@ -199,7 +199,7 @@ open class FocusNode: SCNNode {
             updateAlignment(for: hitTestResult, yRotationAngle: angle)
         }
         
-        self.simdPosition = hitTestResult.worldTransform.translation
+        self.simdPosition = position
 		if self.scaleNodeBasedOnDistance {
 			self.simdScale = SIMD3<Float>(repeating: scaleBasedOnDistance(camera: camera))
 		}
