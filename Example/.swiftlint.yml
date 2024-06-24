@@ -1,5 +1,0 @@
-excluded:
-  - Pods/
-variable_name:
-  min_length:
-    warning: 1
