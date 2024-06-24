@@ -78,7 +78,7 @@ open class FocusNode: SCNNode {
     private var currentAlignment: ARPlaneAnchor.Alignment?
     
     /// The current plane anchor if the focus square is on a plane.
-    private(set) var currentPlaneAnchor: ARPlaneAnchor?
+    public private(set) var currentPlaneAnchor: ARPlaneAnchor?
     
     /// The focus square's most recent positions.
     public private(set) var recentFocusNodePositions: [SIMD3<Float>] = []
