@@ -8,12 +8,12 @@
 
 import SceneKit
 
-internal extension float4x4 {
+public extension float4x4 {
     /**
      Treats matrix as a (right-hand column-major convention) transform matrix
      and factors out the translation component of the transform.
      */
-    var translation: SIMD3<Float> {
+    public var translation: SIMD3<Float> {
         get {
             let translation = columns.3
             
@@ -27,5 +27,5 @@ internal extension float4x4 {
     /**
      Factors out the orientation component of the transform.
      */
-    var orientation: simd_quatf { simd_quaternion(self) }
+    public var orientation: simd_quatf { simd_quaternion(self) }
 }
