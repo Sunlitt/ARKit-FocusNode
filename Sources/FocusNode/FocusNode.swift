@@ -55,7 +55,7 @@ open class FocusNode: SCNNode {
             case .initializing:
                 displayAsBillboard()
             case let .detecting(hitTestResult, camera):
-                guard let planeAnchor = hitTestResult.anchor as? ARPlaneAnchor, planeAnchor.alignment == allowedAlignment else { return }
+                guard let planeAnchor = hitTestResult.anchor as? ARPlaneAnchor, planeAnchor.alignment == allowedAlignment, planeAnchor.classification != .ceiling else { return }
                 
                     (viewDelegate as? (ARSCNView & ARSmartHitTest))?.scene.rootNode.addChildNode(self)
                     nodeOnPlane(for: hitTestResult, planeAnchor: planeAnchor, camera: camera)

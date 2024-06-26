@@ -13,7 +13,7 @@ public extension float4x4 {
      Treats matrix as a (right-hand column-major convention) transform matrix
      and factors out the translation component of the transform.
      */
-    public var translation: SIMD3<Float> {
+    var translation: SIMD3<Float> {
         get {
             let translation = columns.3
             
@@ -27,5 +27,5 @@ public extension float4x4 {
     /**
      Factors out the orientation component of the transform.
      */
-    public var orientation: simd_quatf { simd_quaternion(self) }
+    var orientation: simd_quatf { simd_quaternion(self) }
 }
