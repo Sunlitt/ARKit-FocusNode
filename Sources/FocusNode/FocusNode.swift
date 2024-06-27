@@ -8,7 +8,6 @@
 
 import ARKit
 import SmartHitTest
-import Combine
 
 private extension UIView {
     /// Center of the view
@@ -67,7 +66,7 @@ open class FocusNode: SCNNode {
     
     public var allowedAlignment: ARPlaneAnchor.Alignment
     
-    public var onPlane: PassthroughSubject<Bool, Never> = false
+    public var onPlane: Bool = false
     
     /// Indicates if the square is currently being animated.
     public var isAnimating = false
