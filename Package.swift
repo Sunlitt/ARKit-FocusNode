@@ -10,14 +10,9 @@ let package = Package(
     .library(name: "FocusNode", targets: ["FocusNode"]),
   ],
   dependencies: [
-//  .package(path: "../ARKit-SmartHitTest")
-    .package(
-      url: "https://github.com/maxxfrazer/ARKit-SmartHitTest",
-      .upToNextMajor(from: "2.0.0")
-    )
+    .package(url: "https://github.com/Sunlitt/ARKit-SmartHitTest.git", branch: "master")
   ],
   targets: [
     .target(name: "FocusNode", dependencies: ["SmartHitTest"])
-  ],
-  swiftLanguageVersions: [.v5]
+  ]
 )
