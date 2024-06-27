@@ -67,7 +67,7 @@ open class FocusNode: SCNNode {
     
     public var allowedAlignment: ARPlaneAnchor.Alignment
     
-    public var onPlane: PassthroughSubject<Bool, Never> = false
+    public var onPlane: CurrentValueSubject<Bool, Never> = false
     
     /// Indicates if the square is currently being animated.
     public var isAnimating = false
