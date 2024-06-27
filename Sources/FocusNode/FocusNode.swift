@@ -21,7 +21,7 @@ private extension UIView {
  An `SCNNode` which is used to provide uses with visual cues about the status of ARKit world tracking.
  - Tag: FocusSquare
  */
-open class FocusNode: SCNNode, ObservableObject {
+open class FocusNode: SCNNode {
     weak public var viewDelegate: ARSmartHitTest?
     
     // MARK: - Types
@@ -66,7 +66,7 @@ open class FocusNode: SCNNode, ObservableObject {
     
     public var allowedAlignment: ARPlaneAnchor.Alignment
     
-    @Published public var onPlane: Bool = false
+    public var onPlane: Bool = false
     
     /// Indicates if the square is currently being animated.
     public var isAnimating = false
