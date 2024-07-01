@@ -13,6 +13,6 @@ let package = Package(
     .package(url: "https://github.com/Sunlitt/ARKit-SmartHitTest.git", branch: "master")
   ],
   targets: [
-    .target(name: "FocusNode", dependencies: ["SmartHitTest"])
+    .target(name: "FocusNode", dependencies: ["ARKit-SmartHitTest"])
   ]
 )
